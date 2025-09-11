@@ -1,4 +1,5 @@
 # HTML部分
+```html
 所有组件共有部分：
 id=""     唯一的id
 class=""  分组
@@ -13,35 +14,49 @@ name=""   名称
 <title></title> 页面标题
 
 <body> 主体部分 </body>
+```
 
 ## 四级标题
+```html
 <h1></h1>
 <h2></h2>
 <h3></h3>
 <h4></h4>
+```
 
 ## 文本内容
+```html
 <p></p>
 
 <br> 换行
 <strong></strong> 对某部分加粗
+```
 
-## <a></a> 链接
+## 链接
+```html
+<a></a> 
 href=""         链接的地址/网址
+```
 
-## <input> 输入框
+## 输入框
+```html
+<input> 
 type=""         输入框类型
 placeholder=""  提示文字
 value=""        默认值，也作为输入框的内容
 name=""         该输入框组件名字
 
 required        必填项
-
-<button></button> 按钮
-
-<script></script> js脚本
+```
+## 按钮
+```html
+<button></button> 
+```
+## js脚本
+```html
+<script></script> 
 src=""          js文件地址
-
+```
 
 # js部分
 
