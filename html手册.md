@@ -58,6 +58,11 @@ required        必填项
 src=""          js文件地址
 ```
 
+## css关联链接
+```html
+<link rel="stylesheet" href="style.css">
+```
+
 # js部分
 
 ```js
@@ -94,7 +99,6 @@ document.querySelectorAll("css选择器语法")
 
 ## 组件的事件监听
 ```js
-
 // 假设element是一个组件
 element.addEventListener("事件名称", function () {"触发后的行为"})
 
@@ -103,4 +107,28 @@ element.addEventListener("事件名称", function () {"触发后的行为"})
     click        点击html标签
     submit       表单提交（写在<form></form>里面）
                  可监测：输入框中按回车/按钮按下
+*/
+```
+
+## js异步循环执行
+```js
+// 重复执行：等待delay_time秒，执行函数
+setInterval(function, delay_time)
+
+```
+
+# css部分
+```js
+// css选择器 + 内容
+
+p.classname {
+    text-align: center;
+}
+
+// 常见属性：
+/*
+    文本对齐方式
+    text-align:  center/left/right/justified
+
+
 */
