@@ -1,28 +1,185 @@
-<!DOCTYPE html>
 <html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>我的个人网页</title>
+        <style>
+            * {
+                padding: 0px;
+                margin: 0px;
+            }
 
-<head>
-    <link rel="stylesheet" href="style.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>千禧论坛</title>
-</head>
+            h1 {
+                height: 10%;
+                line-height: 200%;
+                text-align: center;
+                font-family: serif;
+                
+                background-color: #5dc;
+                color: #208;
+                text-shadow: 1.5px 1.5px #f3c;
+            }
 
-<body>
-    <h1 class="site_title">千禧论坛</h1>
-    <p class="time_title"></p>
-    <h1>Hello World!</h1>
-    <p>这是一条消息</p>
-    <p>这是第二条消息</p>
-    <br>
-    <p>这是一条消息</p>
-    <a href="https://www.baidu.com">点我跳转百度</a>
-    <br>
-    <input id="name_input1" type="text" placeholder="输入你的名字">
-    <button id="b1">我是按钮</button>
-    <p class="message">你是谁啊？</p>
+            #page-container {
+                width: 100%;
+                height: 90%;
 
-    <script src="script.js"></script>
-</body>
+            }
 
+            #left-page {
+                width: 30%;
+                height: 900%;
+
+                background-color: #208;
+                color: #fff;
+                float: left;
+            }
+            #right-page {
+                width: 70%;
+                height: 900%;
+                
+                background-color: #dad;
+                color: #fff;
+                float: left;
+            }
+
+            #left-title {
+                width: 50%;
+                height: 40px;
+                margin-left: 20%;
+                margin-right: 20%;
+                margin-bottom: 10%;
+                padding-left: 10%;
+
+                text-align: center;
+                font-weight: normal;
+                line-height: 230%;
+
+                background-color: #00f;
+                background-image: url(icons/user_profile.png);
+                background-repeat: no-repeat;
+                background-size: 35px;
+                background-position: 20px 5px;
+            }
+
+            #right-title {
+                width: 50%;
+                height: 40px;
+                margin-left: 20%;
+                margin-right: 20%;
+                margin-bottom: 5%;
+                padding-left: 10%;
+
+                text-align: center;
+                font-weight: normal;
+                line-height: 230%;
+
+                background-color: #f3c;
+                background-image: url(icons/gallery.png);
+                background-repeat: no-repeat;
+                background-size: 25px;
+                background-position: 40px 8px;
+            }
+
+            #introduction-content {
+                width: 73%;
+                margin-left: 15%;
+                margin-right: 15%;
+                margin-bottom: 15%;
+                text-indent: 10%;
+                background-color: #00f;
+            }
+
+            #index-content {
+                width: 73%;
+                margin-left: 15%;
+                margin-right: 15%;
+
+                text-indent: 10%;
+                background-color: #00f;
+            }
+
+            img {
+                border: 3px solid #f3c;
+                border-radius: 5px;
+                margin-left: 10px;
+                margin-right: 10px;
+                margin-bottom: 20px;
+                float: left;
+            }
+
+            img:hover {
+                border: 3px solid #f00;
+            }
+
+            .description {
+                color: #208;
+                margin-left: 10px;
+                margin-bottom: 10px;
+                font-size: 140%;
+                font-weight: 500;
+                font-family: serif;
+                float: none;
+            }
+
+            .title {
+                text-shadow: 1px 1px #f3c;
+            }
+
+            a {
+                color: #dad;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <h1>Alex's Webpage</h1>
+        <ol id="page-container">
+            <ol id="left-page">
+                <h3 id="left-title">简介</h3>
+                <p id="introduction-content">该网页于2025年9月30日开始制作，完工于2025年X月X日。
+                    <br/>
+                    <br/>制作者：Alex Dreemurr
+                </p>
+                <p id="index-content">索引
+                    <br/>
+                    <a href="#gallery1">10 Days' Travel in Japan</a>
+                    <br/>
+                    <a href="#gallery2">My First Month's Freshman Life</a>
+                    <br/>
+                    <a href="#gallery3">Rhythm Game Record(Phigros)</a>
+                </p>
+            </ol>
+
+            <ol id="right-page">
+                <h3 id="right-title">照片展览馆</h3>
+
+                <p id="gallery1" class="description title">10 Days' Travel in Japan</p>
+                <img src="photos/street1.jpg" width=60%>
+                <img src="photos/kimchi-chaofan.jpg" width=30%>
+                <img src="photos/kare-rice.jpg" width=30%>
+                <img src="photos/kare-rice2.jpg" width=45%>
+                <img src="photos/sweet.jpg" width=45%>
+                <img src="photos/sunset.jpg" width=95%>
+                <img src="photos/ferriswheel.jpg" width=70%>
+                <div style="clear: both;"></div>
+                <p id="gallery2" class="description title">My First Month's Freshman Life</p>
+                <img src="photos/momument.jpg" width=50%>
+                <img src="photos/gruntchicken.jpg" width=35%>
+                <img src="photos/friedmeat.jpg" width=35%>
+                <img src="photos/scary.jpg" width=80%>
+                <img src="photos/show.jpg" width=45%>
+                <img src="photos/school_night.jpg" width=45%>
+                <div style="clear: both;"></div>
+                <p id="gallery3" class="description title">Rhythm Game Record(Phigros)</p>
+                <img src="photos/rkslist.jpg" width=60%>
+                <img src="photos/yukii.jpg" width=30%>
+                <img src="photos/flutterecho.jpg" width=30%>
+                <img src="photos/ds.jpg" width=30%>
+                <img src="photos/ds2.jpg" width=30%>
+            </ol>
+        </ol>
+
+    </body>
 </html>
