@@ -1,185 +1,367 @@
 <html>
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>我的个人网页</title>
         <style>
-            * {
-                padding: 0px;
-                margin: 0px;
-            }
-
-            h1 {
-                height: 10%;
-                line-height: 200%;
-                text-align: center;
+            *, *::before, *::after {
+                box-sizing: border-box;
+                --more-shallow-orange: hsl(40, 50%, 98%);
+                --shallow-orange: hsl(40, 50%, 93%);
+                --less-shallow-orange: hsl(40, 30%, 86%);
+                --orange: hsl(40, 10%, 70%);
+                --de-orange: hsl(40, 10%, 60%);
+                --deep-orange: hsl(40, 10%, 50%);
+                --word-color: hsl(40, 30%, 10%);
+                --d: hsl(41, 57%, 84%);
+                padding: 0;
+                margin: 0;
+                list-style: none;
                 font-family: serif;
-                
-                background-color: #5dc;
-                color: #208;
-                text-shadow: 1.5px 1.5px #f3c;
+            }
+            
+            /* 整个滚动条宽度 */
+            ::-webkit-scrollbar {
+                width: 8px;
             }
 
-            #page-container {
-                width: 100%;
-                height: 90%;
-
+            /* 轨道 */
+            ::-webkit-scrollbar-track {
+                background-color: var(--shallow-orange);
+                border-radius: 10px;
             }
 
-            #left-page {
-                width: 30%;
-                height: 900%;
-
-                background-color: #208;
-                color: #fff;
-                float: left;
-            }
-            #right-page {
-                width: 70%;
-                height: 900%;
-                
-                background-color: #dad;
-                color: #fff;
-                float: left;
+            /* 滑块 */
+            ::-webkit-scrollbar-thumb {
+                background-color: var(--orange);
+                border-radius: 10px;
             }
 
-            #left-title {
+            /* 滑块 hover */
+            ::-webkit-scrollbar-thumb:hover {
+                background-color: var(--de-orange);
+            }
+            body {
+                background-color: var(--shallow-orange);
+            }
+            p {
+                color: var(--word-color);
+            }
+
+            .container {
+                max-width: 1080px;
+                margin: 0 auto;
+            }
+            .main {
+                display: flex;
+                height: 100vh;
+            }
+            .main > .left {
+                flex: 2;
+                display: flex;
+                flex-direction: column;
+                background-color: var(--less-shallow-orange);
+                min-width: 180px;
+            }
+
+
+            .main > .middle {
+                flex: 6;
+                overflow-y: auto;
+                min-width: 300px;
+            }
+
+            .main > .right {
+                flex: 3;
+                display: flex;
+                flex-direction: column;
+                flex-shrink: 1;
+                min-width: 180px;
+                background-color: var(--less-shallow-orange);
+            }
+
+            .main > * {
+                padding: 2em;
+            }
+
+
+            .main > .left .left-up {
+                flex: 2;
+            }
+
+            .main > .left .nav-left {
+                flex: 3;
+
+
+            }
+            .left img {
                 width: 50%;
-                height: 40px;
-                margin-left: 20%;
-                margin-right: 20%;
-                margin-bottom: 10%;
-                padding-left: 10%;
-
-                text-align: center;
-                font-weight: normal;
-                line-height: 230%;
-
-                background-color: #00f;
-                background-image: url(icons/user_profile.png);
-                background-repeat: no-repeat;
-                background-size: 35px;
-                background-position: 20px 5px;
+                border-radius: 100%;
+                transition-duration: 0.5s;
+                transition-property: all;
             }
-
-            #right-title {
-                width: 50%;
-                height: 40px;
-                margin-left: 20%;
-                margin-right: 20%;
-                margin-bottom: 5%;
-                padding-left: 10%;
-
-                text-align: center;
-                font-weight: normal;
-                line-height: 230%;
-
-                background-color: #f3c;
-                background-image: url(icons/gallery.png);
-                background-repeat: no-repeat;
-                background-size: 25px;
-                background-position: 40px 8px;
+            .left-up > img:hover {
+                width: 65%;
             }
-
-            #introduction-content {
-                width: 73%;
-                margin-left: 15%;
-                margin-right: 15%;
-                margin-bottom: 15%;
-                text-indent: 10%;
-                background-color: #00f;
-            }
-
-            #index-content {
-                width: 73%;
-                margin-left: 15%;
-                margin-right: 15%;
-
-                text-indent: 10%;
-                background-color: #00f;
-            }
-
-            img {
-                border: 3px solid #f3c;
-                border-radius: 5px;
-                margin-left: 10px;
-                margin-right: 10px;
-                margin-bottom: 20px;
-                float: left;
-            }
-
-            img:hover {
-                border: 3px solid #f00;
-            }
-
-            .description {
-                color: #208;
-                margin-left: 10px;
-                margin-bottom: 10px;
-                font-size: 140%;
+            .left .name {
+                margin-top: 1em;
+                font-size: 1.2em;
                 font-weight: 500;
-                font-family: serif;
-                float: none;
+            }
+            .left .introduction {
+                margin-top: 0.5em;
+                font-size: 0.8em;
+            }
+            
+            .nav-left li {
+                transition-duration: 0.5s;
+                transition-property: all;
+                padding: 0.5em 0;
+                border-radius: 0.5em;
+            }
+            .nav-left li:hover {
+                background-color: var(--deep-orange);
+                color: white;
+            }
+            .nav-left li + li {
+                margin-top: 1em;
             }
 
-            .title {
-                text-shadow: 1px 1px #f3c;
+            .nav-left img {
+                width: 1.2em;
+                position: relative;
+                top: 0.2em;
+                left: 0.5em;
+
+            }
+            .nav-left span {
+                margin-left: 3em;
+            }
+            
+            .diary-box {
+                display: flex;
+                flex-direction: column;
             }
 
-            a {
-                color: #dad;
+            .diary-box > .diary {
+                min-height: 20em;
+                background-color: var(--more-shallow-orange);
+                border-radius: 0.5em;
             }
+
+            .diary-box > .diary + .diary {
+                margin-top: 2em;
+            }
+            
+            .diary > img {
+                width: 100%;
+                height: 10em;
+                object-fit: cover;
+                border-top-left-radius: 0.5em;
+                border-top-right-radius: 0.5em;
+
+            }
+
+            .diary .tag-box > p:nth-child(2n-1) {
+                background-color: hsl(80, 30%, 50%);
+                color: white;
+            }
+            .diary .tag-box > p:nth-child(2n) {
+                background-color: hsl(0, 30%, 50%);
+                color: white;
+            }
+
+            .diary > .content {
+                padding: 0.5em 1em;
+                border-bottom-left-radius: 0.5em;
+                border-bottom-right-radius: 0.5em;
+            }
+            .diary {
+                transition-duration: 0.5s;
+                transition-property: all;
+            }
+            .diary:hover {
+                opacity: 0.7;
+            }
+
+            .diary > .content > h1 {
+                margin-top: 0.1em;
+            }
+            .diary > .content > .description {
+                font-size: 0.9em;
+            }
+            .diary > .content > .date {
+                font-size: 0.5em;
+                color: hsl(320, 60%, 50%);
+                margin-top: 2.5em;
+            }
+            .diary > .content > .date > img {
+                width: 2.5em;
+                margin-right: 1em;
+            }
+            .diary > .content > .date > span {
+                position: relative;
+                bottom: 0.5em;
+            }
+            .right > * + * {
+                margin-top: 2em;
+            }
+            .right .right-up {
+                background-color: var(--more-shallow-orange);
+                padding: 1em;
+                border-radius: 0.5em;
+            }
+            .right .right-up input {
+                background-color: var(--more-shallow-orange);
+                border: none;
+                width: 100%;
+            }
+            .search-box {
+                display: flex;
+
+            }
+            .search-box img {
+                width: 1em;
+                position: relative;
+                bottom: 0.1em;
+                margin-left: 0.5em;
+            }
+            .time-box, .tag-box {
+                margin-top: 0.5em;
+            }
+            .time-box {
+                display: flex;
+                flex-direction: column;
+            }
+            .time-box > li {
+                background-color: var(--more-shallow-orange);
+                padding: 1em;
+                font-size: 0.8em;
+                transition-duration: 0.5s;
+                transition-property: all;
+            }
+            .time-box li:hover {
+                background-color: var(--deep-orange);
+                color: white;
+            }
+            .time-box > li + li {
+                margin-top: 3px;
+            }
+
+            .time-box .first {
+                border-top-right-radius: 0.5em;
+                border-top-left-radius: 0.5em;
+            }
+            .time-box .last {
+                border-bottom-left-radius: 0.5em;
+                border-bottom-right-radius: 0.5em;
+            }
+
+            .tag-box {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.5em;
+            }
+            .tag-box > p {
+                padding: 0.2em 1em;
+                border-radius: 0.5em;
+
+            }
+            .right .tag-box > p {
+                background-color: var(--more-shallow-orange);
+            }
+
+
 
         </style>
     </head>
-
     <body>
-        <h1>Alex's Webpage</h1>
-        <ol id="page-container">
-            <ol id="left-page">
-                <h3 id="left-title">简介</h3>
-                <p id="introduction-content">该网页于2025年9月30日开始制作，完工于2025年X月X日。
-                    <br/>
-                    <br/>制作者：Alex Dreemurr
-                </p>
-                <p id="index-content">索引
-                    <br/>
-                    <a href="#gallery1">10 Days' Travel in Japan</a>
-                    <br/>
-                    <a href="#gallery2">My First Month's Freshman Life</a>
-                    <br/>
-                    <a href="#gallery3">Rhythm Game Record(Phigros)</a>
-                </p>
-            </ol>
+        <div class="container">
+            <div class="main">
+                <div class="left">
+                    <div class="left-up">
+                        <img src="img/head_pic.jpg"/>
+                        <p class="name">Alex Dreemurr</p>
+                        <p class="introduction">这位用户没有什么可说的。
+                            <br/>——
+                        </p>
+                    </div>
+                    <ul class="nav-left">
+                        <li><a><img src="img/home.svg"/><span>主页</span></a></li>
+                        <li><a><img src="img/document.svg"/><span>归档</span></a></li>
+                        <li><a><img src="img/message.svg"/><span>留言</span></a></li>
+                        <li><a><img src="img/link.svg"/><span>链接</span></a></li>
+                        <li><a><img src="img/about.svg"/><span>关于</span></a></li>
+                        <li><a><img src="img/search.svg"/><span>搜索</span></a></li>
+                    </ul>
+                </div>
 
-            <ol id="right-page">
-                <h3 id="right-title">照片展览馆</h3>
+                <div class="middle">
+                    <div class="diary-box">
+                        <div class="diary">
+                            <img src="img/school_night.jpg"/>
+                            <div class="content">                            
+                                <div class="tag-box">
+                                    <p>日常</p>
+                                    <p>学校</p>
+                                </div>
+                                <h1>杭电的一天生活</h1>
+                                <p class="description">除了吃就是睡</p>
+                                <p class="date"><img src="img/calendar.png"/><span>2025年12月6日</span></p>
+                            </div>
+                        </div>
+                        <div class="diary">
+                            <img src="img/ferriswheel.jpg"/>
+                            <div class="content">                            
+                                <div class="tag-box">
+                                    <p>日常</p>
+                                    <p>旅游</p>
+                                    <p>景点</p>
+                                </div>
+                                <h1>摩天轮</h1>
+                                <p class="description">包厢还有音乐听</p>
+                                <p class="date"><img src="img/calendar.png"/><span>2025年8月6日</span></p>
+                            </div>
+                        </div>
+                        <div class="diary">3</div>
+                    </div>
+                </div>
 
-                <p id="gallery1" class="description title">10 Days' Travel in Japan</p>
-                <img src="photos/street1.jpg" width=60%>
-                <img src="photos/kimchi-chaofan.jpg" width=30%>
-                <img src="photos/kare-rice.jpg" width=30%>
-                <img src="photos/kare-rice2.jpg" width=45%>
-                <img src="photos/sweet.jpg" width=45%>
-                <img src="photos/sunset.jpg" width=95%>
-                <img src="photos/ferriswheel.jpg" width=70%>
-                <div style="clear: both;"></div>
-                <p id="gallery2" class="description title">My First Month's Freshman Life</p>
-                <img src="photos/momument.jpg" width=50%>
-                <img src="photos/gruntchicken.jpg" width=35%>
-                <img src="photos/friedmeat.jpg" width=35%>
-                <img src="photos/scary.jpg" width=80%>
-                <img src="photos/show.jpg" width=45%>
-                <img src="photos/school_night.jpg" width=45%>
-                <div style="clear: both;"></div>
-                <p id="gallery3" class="description title">Rhythm Game Record(Phigros)</p>
-                <img src="photos/rkslist.jpg" width=60%>
-                <img src="photos/yukii.jpg" width=30%>
-                <img src="photos/flutterecho.jpg" width=30%>
-                <img src="photos/ds.jpg" width=30%>
-                <img src="photos/ds2.jpg" width=30%>
-            </ol>
-        </ol>
+                <div class="right">
+                    <div class="right-up">
+                        <form>
+                            <p>搜索</p>
+                            <div class="search-box">
+                                <input placeholder="找点什么呢？"></input>
+                                <img src="img/search.svg"/>
+                            </div>
+                            
+                        </form>
+                    </div>
 
+                    <div class="right-middle">
+                        <p>归档</p>
+                        <ul class="time-box">
+                            <li class="first"><span>2025</span></li>
+                            <li><span>2024</span></li>
+                            <li><span>2023</span></li>
+                            <li class="last"><span>2022</span></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="right-down">
+                        <p>分类</p>
+                        <div class="tag-box">
+                            <p>旅游</p>
+                            <p>日常</p>
+                            <p>景点</p>
+                            <p>代码</p>
+                            <p>学校</p>
+                            <p>日本语</p>
+                            <p>作品</p>
+                            <p>收藏夹</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </body>
 </html>
