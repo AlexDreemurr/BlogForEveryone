@@ -21,6 +21,7 @@
     margin: 0;
     transition-duration: 0.5s;
     transition-property: all;
+    font-family: serif;
 }
 a {
     color: var(--white);

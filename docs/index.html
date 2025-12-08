@@ -39,6 +39,26 @@
                 font-size: 0.5rem;
             }
 
+            .title-background {
+                display: flex;
+                height: 15vh;
+            }
+
+            .title-background > .left {
+                flex: 1;
+                background-color: var(--white);
+            }
+            .title-background > .right {
+                flex: 3;
+                
+                object-fit: cover;
+
+            }
+            .title > h1 {
+                position: relative;
+                top: -15vh;
+                color: var(--red);
+            }
 
 
 
@@ -56,8 +76,11 @@
         </header>
         <main>
             <div class="title">
-                <div class="left"></div>
-                <img class="right"/>
+                <div class="title-background">
+                    <div class="left"></div>
+                    <img class="right" src="img/title-background.jpg"/>
+                </div>
+                <h1>AlexDreemurr</h1>
             </div>
         </main>
         <footer></footer>
