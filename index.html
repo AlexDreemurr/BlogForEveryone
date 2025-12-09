@@ -1,367 +1,204 @@
 <html>
     <head>
+        <meta name="viewport"
+        content="width=device-width, initial-scale=1"/>
+
+        <link href="communal_style.css" type="text/css" rel="stylesheet"/>
+    
+        
         <style>
-            *, *::before, *::after {
-                box-sizing: border-box;
-                --more-shallow-orange: hsl(40, 50%, 98%);
-                --shallow-orange: hsl(40, 50%, 93%);
-                --less-shallow-orange: hsl(40, 30%, 86%);
-                --orange: hsl(40, 10%, 70%);
-                --de-orange: hsl(40, 10%, 60%);
-                --deep-orange: hsl(40, 10%, 50%);
-                --word-color: hsl(40, 30%, 10%);
-                --d: hsl(41, 57%, 84%);
-                padding: 0;
-                margin: 0;
-                list-style: none;
-                font-family: serif;
-            }
-            
-            /* 整个滚动条宽度 */
-            ::-webkit-scrollbar {
-                width: 8px;
-            }
-
-            /* 轨道 */
-            ::-webkit-scrollbar-track {
-                background-color: var(--shallow-orange);
-                border-radius: 10px;
-            }
-
-            /* 滑块 */
-            ::-webkit-scrollbar-thumb {
-                background-color: var(--orange);
-                border-radius: 10px;
-            }
-
-            /* 滑块 hover */
-            ::-webkit-scrollbar-thumb:hover {
-                background-color: var(--de-orange);
-            }
-            body {
-                background-color: var(--shallow-orange);
-            }
-            p {
-                color: var(--word-color);
-            }
-
-            .container {
-                max-width: 1080px;
-                margin: 0 auto;
-            }
-            .main {
+            .nav-bar {   
                 display: flex;
-                height: 100vh;
+                background-color: var(--purple);
+                height: 10vh;
             }
-            .main > .left {
-                flex: 2;
+
+            .nav-bar > a {
+                flex: 1;
+                color: var(--whitegray);
+                padding: 0.3rem;
                 display: flex;
                 flex-direction: column;
-                background-color: var(--less-shallow-orange);
-                min-width: 180px;
+                align-items: center;
+                justify-content: center;
             }
 
-
-            .main > .middle {
-                flex: 6;
-                overflow-y: auto;
-                min-width: 300px;
+            .nav-bar > a:hover {
+                background-color: var(--white);
+                color: var(--purple);
+                cursor: pointer;
             }
 
-            .main > .right {
-                flex: 3;
-                display: flex;
-                flex-direction: column;
-                flex-shrink: 1;
-                min-width: 180px;
-                background-color: var(--less-shallow-orange);
+            .nav-bar > a > svg {
+                height: 2.5rem;
+                width: 2.5rem;
+                display: block;
             }
-
-            .main > * {
-                padding: 2em;
-            }
-
-
-            .main > .left .left-up {
-                flex: 2;
-            }
-
-            .main > .left .nav-left {
-                flex: 3;
-
-
-            }
-            .left img {
-                width: 50%;
-                border-radius: 100%;
-                transition-duration: 0.5s;
-                transition-property: all;
-            }
-            .left-up > img:hover {
-                width: 65%;
-            }
-            .left .name {
-                margin-top: 1em;
-                font-size: 1.2em;
-                font-weight: 500;
-            }
-            .left .introduction {
-                margin-top: 0.5em;
-                font-size: 0.8em;
-            }
-            
-            .nav-left li {
-                transition-duration: 0.5s;
-                transition-property: all;
-                padding: 0.5em 0;
-                border-radius: 0.5em;
-            }
-            .nav-left li:hover {
-                background-color: var(--deep-orange);
-                color: white;
-            }
-            .nav-left li + li {
-                margin-top: 1em;
-            }
-
-            .nav-left img {
-                width: 1.2em;
+            .nav-bar > a > p {
                 position: relative;
-                top: 0.2em;
-                left: 0.5em;
+                top: -0.1rem;
+                font-size: 0.5rem;
+            }
 
+            .title {
+                position: relative;
+                height: 15vh;
             }
-            .nav-left span {
-                margin-left: 3em;
-            }
-            
-            .diary-box {
+            .title-background {
                 display: flex;
-                flex-direction: column;
+                height: 15vh;
             }
 
-            .diary-box > .diary {
-                min-height: 20em;
-                background-color: var(--more-shallow-orange);
-                border-radius: 0.5em;
+            .title-background > .left {
+                width: 25vw;
+                background-color: var(--white);
             }
-
-            .diary-box > .diary + .diary {
-                margin-top: 2em;
-            }
-            
-            .diary > img {
-                width: 100%;
-                height: 10em;
+            .title-background > img.right {
+                
+                width: 75vw;
+                height: 100%;
                 object-fit: cover;
-                border-top-left-radius: 0.5em;
-                border-top-right-radius: 0.5em;
+                display: block;
 
             }
-
-            .diary .tag-box > p:nth-child(2n-1) {
-                background-color: hsl(80, 30%, 50%);
-                color: white;
-            }
-            .diary .tag-box > p:nth-child(2n) {
-                background-color: hsl(0, 30%, 50%);
-                color: white;
-            }
-
-            .diary > .content {
-                padding: 0.5em 1em;
-                border-bottom-left-radius: 0.5em;
-                border-bottom-right-radius: 0.5em;
-            }
-            .diary {
-                transition-duration: 0.5s;
-                transition-property: all;
-            }
-            .diary:hover {
-                opacity: 0.7;
+            .title > h1 {
+                position: absolute;
+                top: 2vh;
+                left: calc(25vw - 2.3em);
+                color: var(--red);
+                
+                font-size: 2rem;
+                /*font-size: clamp(2rem, 5vh, 10rem);*/
+                font-weight: 500;
+                font-family: "zodiak";
             }
 
-            .diary > .content > h1 {
-                margin-top: 0.1em;
+            .title > h1 > span {
+                color: var(--whitegray);
             }
-            .diary > .content > .description {
-                font-size: 0.9em;
+            @media (min-width: 700px) {
+                .title > h1 {
+                    font-size: 9vh;
+                }
+                .title {
+                    height: 20vh;
+                }
+                .title-background {
+                    height: 20vh;
+                }
             }
-            .diary > .content > .date {
-                font-size: 0.5em;
-                color: hsl(320, 60%, 50%);
-                margin-top: 2.5em;
-            }
-            .diary > .content > .date > img {
-                width: 2.5em;
-                margin-right: 1em;
-            }
-            .diary > .content > .date > span {
-                position: relative;
-                bottom: 0.5em;
-            }
-            .right > * + * {
-                margin-top: 2em;
-            }
-            .right .right-up {
-                background-color: var(--more-shallow-orange);
-                padding: 1em;
-                border-radius: 0.5em;
-            }
-            .right .right-up input {
-                background-color: var(--more-shallow-orange);
-                border: none;
-                width: 100%;
-            }
-            .search-box {
+            .decoration {
+                height: fit-content;
                 display: flex;
+            }
+            .deco-block {
+                padding: 0.2em;
+            }
+            .deco-block:nth-child(3n-2) {
+                background-color: var(--purple);
+            }
+            .deco-block:nth-child(3n-1) {
+                background-color: var(--brown);
+            }
+            .deco-block:nth-child(3n) {
+                background-color: var(--gray);
+            }
+            .deco-block:first-child {
+                background-color: var(--whitegray);
+                padding-top: 0.3em;
+
 
             }
-            .search-box img {
-                width: 1em;
-                position: relative;
-                bottom: 0.1em;
-                margin-left: 0.5em;
-            }
-            .time-box, .tag-box {
-                margin-top: 0.5em;
-            }
-            .time-box {
+            .dot-box {
                 display: flex;
-                flex-direction: column;
+                margin-bottom: 0.1em;
             }
-            .time-box > li {
-                background-color: var(--more-shallow-orange);
-                padding: 1em;
-                font-size: 0.8em;
-                transition-duration: 0.5s;
-                transition-property: all;
+            .dot {
+                border-radius: 100%;
+                background-color: var(--red);
+                width: 20px;
+                height: 20px;
+                margin: auto;
             }
-            .time-box li:hover {
-                background-color: var(--deep-orange);
-                color: white;
-            }
-            .time-box > li + li {
-                margin-top: 3px;
-            }
-
-            .time-box .first {
-                border-top-right-radius: 0.5em;
-                border-top-left-radius: 0.5em;
-            }
-            .time-box .last {
-                border-bottom-left-radius: 0.5em;
-                border-bottom-right-radius: 0.5em;
-            }
-
-            .tag-box {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 0.5em;
-            }
-            .tag-box > p {
-                padding: 0.2em 1em;
-                border-radius: 0.5em;
-
-            }
-            .right .tag-box > p {
-                background-color: var(--more-shallow-orange);
-            }
-
-
 
         </style>
     </head>
     <body>
-        <div class="container">
-            <div class="main">
-                <div class="left">
-                    <div class="left-up">
-                        <img src="img/head_pic.jpg"/>
-                        <p class="name">Alex Dreemurr</p>
-                        <p class="introduction">这位用户没有什么可说的。
-                            <br/>——
-                        </p>
-                    </div>
-                    <ul class="nav-left">
-                        <li><a><img src="img/home.svg"/><span>主页</span></a></li>
-                        <li><a><img src="img/document.svg"/><span>归档</span></a></li>
-                        <li><a><img src="img/message.svg"/><span>留言</span></a></li>
-                        <li><a><img src="img/link.svg"/><span>链接</span></a></li>
-                        <li><a><img src="img/about.svg"/><span>关于</span></a></li>
-                        <li><a><img src="img/search.svg"/><span>搜索</span></a></li>
-                    </ul>
+        <header>
+            <ul class="nav-bar">
+                <a href="index.html"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path fill="currentColor" d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></svg><p>首页</p></a>
+                <a><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path fill="currentColor" d="M560-564v-68q33-14 67.5-21t72.5-7q26 0 51 4t49 10v64q-24-9-48.5-13.5T700-600q-38 0-73 9.5T560-564Zm0 220v-68q33-14 67.5-21t72.5-7q26 0 51 4t49 10v64q-24-9-48.5-13.5T700-380q-38 0-73 9t-67 27Zm0-110v-68q33-14 67.5-21t72.5-7q26 0 51 4t49 10v64q-24-9-48.5-13.5T700-490q-38 0-73 9.5T560-454ZM260-320q47 0 91.5 10.5T440-278v-394q-41-24-87-36t-93-12q-36 0-71.5 7T120-692v396q35-12 69.5-18t70.5-6Zm260 42q44-21 88.5-31.5T700-320q36 0 70.5 6t69.5 18v-396q-33-14-68.5-21t-71.5-7q-47 0-93 12t-87 36v394Zm-40 118q-48-38-104-59t-116-21q-42 0-82.5 11T100-198q-21 11-40.5-1T40-234v-482q0-11 5.5-21T62-752q46-24 96-36t102-12q58 0 113.5 15T480-740q51-30 106.5-45T700-800q52 0 102 12t96 36q11 5 16.5 15t5.5 21v482q0 23-19.5 35t-40.5 1q-37-20-77.5-31T700-240q-60 0-116 21t-104 59ZM280-494Z"/></svg><p>日记</p></a>
+                <a><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path fill="currentColor" d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm40-80h480L570-480 450-320l-90-120-120 160Zm-40 80v-560 560Z"/></svg><p>相册</p></a>
+                <a><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path fill="currentColor" d="m480-240 160-160-56-56-64 64v-168h-80v168l-64-64-56 56 160 160ZM200-640v440h560v-440H200Zm0 520q-33 0-56.5-23.5T120-200v-499q0-14 4.5-27t13.5-24l50-61q11-14 27.5-21.5T250-840h460q18 0 34.5 7.5T772-811l50 61q9 11 13.5 24t4.5 27v499q0 33-23.5 56.5T760-120H200Zm16-600h528l-34-40H250l-34 40Zm264 300Z"/></svg><p>资源</p></a>
+                <a><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path fill="currentColor" d="M240-400h320v-80H240v80Zm0-120h480v-80H240v80Zm0-120h480v-80H240v80ZM80-80v-720q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H240L80-80Zm126-240h594v-480H160v525l46-45Zm-46 0v-480 480Z"/></svg><p>联系</p></a>
+            </ul>
+        </header>
+        <main>
+            <div class="title">
+                <div class="title-background">
+                    <div class="left"></div>
+                    <img class="right" src="img/title-background.jpg"/>
                 </div>
-
-                <div class="middle">
-                    <div class="diary-box">
-                        <div class="diary">
-                            <img src="img/school_night.jpg"/>
-                            <div class="content">                            
-                                <div class="tag-box">
-                                    <p>日常</p>
-                                    <p>学校</p>
-                                </div>
-                                <h1>杭电的一天生活</h1>
-                                <p class="description">除了吃就是睡</p>
-                                <p class="date"><img src="img/calendar.png"/><span>2025年12月6日</span></p>
-                            </div>
-                        </div>
-                        <div class="diary">
-                            <img src="img/ferriswheel.jpg"/>
-                            <div class="content">                            
-                                <div class="tag-box">
-                                    <p>日常</p>
-                                    <p>旅游</p>
-                                    <p>景点</p>
-                                </div>
-                                <h1>摩天轮</h1>
-                                <p class="description">包厢还有音乐听</p>
-                                <p class="date"><img src="img/calendar.png"/><span>2025年8月6日</span></p>
-                            </div>
-                        </div>
-                        <div class="diary">3</div>
-                    </div>
-                </div>
-
-                <div class="right">
-                    <div class="right-up">
-                        <form>
-                            <p>搜索</p>
-                            <div class="search-box">
-                                <input placeholder="找点什么呢？"></input>
-                                <img src="img/search.svg"/>
-                            </div>
-                            
-                        </form>
-                    </div>
-
-                    <div class="right-middle">
-                        <p>归档</p>
-                        <ul class="time-box">
-                            <li class="first"><span>2025</span></li>
-                            <li><span>2024</span></li>
-                            <li><span>2023</span></li>
-                            <li class="last"><span>2022</span></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="right-down">
-                        <p>分类</p>
-                        <div class="tag-box">
-                            <p>旅游</p>
-                            <p>日常</p>
-                            <p>景点</p>
-                            <p>代码</p>
-                            <p>学校</p>
-                            <p>日本语</p>
-                            <p>作品</p>
-                            <p>收藏夹</p>
-                        </div>
-                    </div>
-
-                </div>
+                <h1>Alex<span>Dreemurr</span></h1>
             </div>
-        </div>
+
+            <div class="decoration">
+
+            </div>
+        </main>
+        <footer></footer>
     </body>
+    <script>
+
+        // 初始时根据页面尺寸生成deco-box
+        var width = window.innerWidth;
+        var height = window.innerHeight;
+        
+        var h = Math.floor(height / 14);
+        var n = Math.floor(width / h);
+        var l = h + (width - n * h) / n;
+        decoration = document.getElementsByClassName("decoration")[0];
+        for (var i = 1; i <= n; i++) {
+            decoration.innerHTML +="<div class='deco-block' style='width:"+l+"px; height:"+h+"px;'></div>";
+        }
+        var deco_blocks = decoration.querySelectorAll(".deco-block");
+        var first =  deco_blocks[0];
+        var htmlString = '';
+        for (var j = 1; j <= 7; j++) {
+            htmlString += "<div class='dot-box'>";
+            for (var i = 1; i <= 7; i++) {
+                htmlString += "<div class='dot' style='width: "+l / 12+"px; height: "+l / 12+"px;'></div>"
+            }
+            htmlString += '</div>';
+
+        }
+        first.innerHTML += htmlString;
+
+        // 监听窗口大小改变，自动调整deco-box的大小和数量
+        window.addEventListener('resize', () => {
+            var width = document.documentElement.clientWidth;
+            var height = document.documentElement.clientHeight;
+            decoration.innerHTML = '';
+
+            var h = Math.floor(height / 14);
+            var n = Math.floor(width / h);
+            var l = h + (width - n * h) / n;
+            for (var i = 1; i <= n; i++) {
+                decoration.innerHTML += "<div class='deco-block' style='width:"+l+"px; height:"+h+"px;'></div>";
+            }
+
+            var deco_blocks = decoration.querySelectorAll(".deco-block");
+            var first =  deco_blocks[0];
+            var htmlString = '';
+            for (var j = 1; j <= 7; j++) {
+                htmlString += "<div class='dot-box'>";
+                for (var i = 1; i <= 7; i++) {
+                    htmlString += "<div class='dot' style='width: "+l / 12+"px; height: "+l / 12+"px;'></div>"
+                }
+                htmlString += '</div>';
+
+            }
+            first.innerHTML += htmlString;
+        });
+    </script>
 </html>
