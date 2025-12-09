@@ -1,11 +1,10 @@
 <html>
     <head>
         <meta name="viewport"
-        content="width=device-width, initial-scale=1"/>
+        content="width=device-width, initial-scale=1, user-scalable=no"/>
 
         <link href="communal_style.css" type="text/css" rel="stylesheet"/>
     
-        
         <style>
             .nav-bar {   
                 display: flex;
@@ -67,7 +66,7 @@
                 left: calc(25vw - 2.3em);
                 color: var(--red);
                 
-                font-size: 2rem;
+                font-size: 2.5rem;
                 /*font-size: clamp(2rem, 5vh, 10rem);*/
                 font-weight: 500;
                 font-family: "zodiak";
@@ -76,7 +75,7 @@
             .title > h1 > span {
                 color: var(--whitegray);
             }
-            @media (min-width: 700px) {
+            @media (min-width: 900px) {
                 .title > h1 {
                     font-size: 9vh;
                 }
@@ -92,36 +91,19 @@
                 display: flex;
             }
             .deco-block {
-                padding: 0.2em;
-            }
-            .deco-block:nth-child(3n-2) {
-                background-color: var(--purple);
-            }
-            .deco-block:nth-child(3n-1) {
-                background-color: var(--brown);
-            }
-            .deco-block:nth-child(3n) {
-                background-color: var(--gray);
-            }
-            .deco-block:first-child {
-                background-color: var(--whitegray);
-                padding-top: 0.3em;
-
-
+                
             }
             .dot-box {
-                display: flex;
-                margin-bottom: 0.1em;
+
             }
             .dot {
-                border-radius: 100%;
-                background-color: var(--red);
-                width: 20px;
-                height: 20px;
-                margin: auto;
+                
             }
 
         </style>
+        <script src="js/dotted_square.js"></script>
+        <script src="js/dotted_triangle.js"></script>
+        <script src="js/circle.js"></script>
     </head>
     <body>
         <header>
@@ -148,7 +130,25 @@
         </main>
         <footer></footer>
     </body>
+
     <script>
+        function randInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        var color_list = ['var(--red)', 'var(--purple)', 'var(--brown)', 'var(--white)', 'var(--gray)'];
+        var pattern_list = ['dottedSquare', 'dottedTriangle', 'circle'];
+        var direction_list = ['bottom-left', 'bottom-right', 'top-left', 'top-right'];
+        
+        function randChoice(my_list, already_item = '') {
+            var len = my_list.length;
+            while (true) {
+                var index = randInt(0, len - 1);
+                if (my_list[index] != already_item) {
+                    return my_list[index];
+                }
+            }
+        }
 
         // 初始时根据页面尺寸生成deco-box
         var width = window.innerWidth;
@@ -159,20 +159,26 @@
         var l = h + (width - n * h) / n;
         decoration = document.getElementsByClassName("decoration")[0];
         for (var i = 1; i <= n; i++) {
-            decoration.innerHTML +="<div class='deco-block' style='width:"+l+"px; height:"+h+"px;'></div>";
+            decoration.innerHTML +="<div class='deco-block' style='width:"+l+"px; height:"+h+"px; background-color: "+randChoice(color_list)+"'></div>";
         }
         var deco_blocks = decoration.querySelectorAll(".deco-block");
-        var first =  deco_blocks[0];
-        var htmlString = '';
-        for (var j = 1; j <= 7; j++) {
-            htmlString += "<div class='dot-box'>";
-            for (var i = 1; i <= 7; i++) {
-                htmlString += "<div class='dot' style='width: "+l / 12+"px; height: "+l / 12+"px;'></div>"
+        for (var i = 0; i < deco_blocks.length; i++) {
+            var deco_block = deco_blocks[i];
+            var color = randChoice(color_list, deco_block.style.backgroundColor);
+            var pattern = randChoice(pattern_list);
+            var direction;
+            if (pattern == 'dottedTriangle') {
+                direction = randChoice(direction_list);
+                dottedTriangle(deco_block, l, color, {corner:direction});
+            } else if (pattern == 'dottedSquare') {
+                dottedSquare(deco_block, l, color);
+            } else if (pattern == 'circle') {
+                circle(deco_block, l, color);
             }
-            htmlString += '</div>';
-
         }
-        first.innerHTML += htmlString;
+
+        var first =  deco_blocks[0];
+        circle(first, l, 'var(--red)');
 
         // 监听窗口大小改变，自动调整deco-box的大小和数量
         window.addEventListener('resize', () => {
@@ -184,21 +190,23 @@
             var n = Math.floor(width / h);
             var l = h + (width - n * h) / n;
             for (var i = 1; i <= n; i++) {
-                decoration.innerHTML += "<div class='deco-block' style='width:"+l+"px; height:"+h+"px;'></div>";
+                decoration.innerHTML +="<div class='deco-block' style='width:"+l+"px; height:"+h+"px; background-color: "+randChoice(color_list)+"'></div>";
             }
-
             var deco_blocks = decoration.querySelectorAll(".deco-block");
-            var first =  deco_blocks[0];
-            var htmlString = '';
-            for (var j = 1; j <= 7; j++) {
-                htmlString += "<div class='dot-box'>";
-                for (var i = 1; i <= 7; i++) {
-                    htmlString += "<div class='dot' style='width: "+l / 12+"px; height: "+l / 12+"px;'></div>"
+            for (var i = 0; i < deco_blocks.length; i++) {
+                var deco_block = deco_blocks[i];
+                var color = randChoice(color_list, deco_block.style.backgroundColor);
+                var pattern = randChoice(pattern_list);
+                var direction;
+                if (pattern == 'dottedTriangle') {
+                    direction = randChoice(direction_list);
+                    dottedTriangle(deco_block, l, color, {corner:direction});
+                } else if (pattern == 'dottedSquare') {
+                    dottedSquare(deco_block, l, color);
+                } else if (pattern == 'circle') {
+                    circle(deco_block, l, color);
                 }
-                htmlString += '</div>';
-
             }
-            first.innerHTML += htmlString;
         });
     </script>
 </html>
