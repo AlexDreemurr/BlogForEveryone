@@ -85,13 +85,17 @@
                 }
             }
             .decoration {
-                height: 10vh;
-                background-color: antiquewhite;
+                height:fit-content;
                 display: flex;
             }
-            .deco-block {
-                flex: 1;
-                border: 1px black solid;
+            .deco-block:nth-child(3n-2) {
+                background-color: var(--purple);
+            }
+            .deco-block:nth-child(3n-1) {
+                background-color: var(--brown);
+            }
+            .deco-block:nth-child(3n) {
+                background-color: var(--gray);
             }
 
 
@@ -115,25 +119,42 @@
                 </div>
                 <h1>AlexDreemurr</h1>
             </div>
+
             <div class="decoration">
-                <script>
-                    var width = window.innerWidth;
-                    var height = window.innerHeight;
-                    
-                    var l = height / 10
-                </script>
-                <div class="deco-block"></div>
-                <div class="deco-block"></div>
-                <div class="deco-block"></div>
-                <div class="deco-block"></div>
-                <div class="deco-block"></div>
-                <div class="deco-block"></div>
-                <div class="deco-block"></div>
-                <div class="deco-block"></div>
-                <div class="deco-block"></div>
-                <div class="deco-block"></div>
+
             </div>
         </main>
         <footer></footer>
     </body>
+    <script>
+
+        // 初始时根据页面尺寸生成deco-box
+        var width = window.innerWidth;
+        var height = window.innerHeight;
+        
+        var h = Math.floor(height / 14);
+        var n = Math.floor(width / h);
+        var l = h + (width - n * h) / n;
+        decoration = document.getElementsByClassName("decoration")[0];
+        for (var i = 1; i <= n; i++) {
+            decoration.innerHTML +="<div class='deco-block' style='width:"+l+"px; height:"+h+"px;'></div>";
+        }
+
+        // 监听窗口大小改变，自动调整deco-box的大小和数量
+        window.addEventListener('resize', () => {
+            var width = document.documentElement.clientWidth;
+            var height = document.documentElement.clientHeight;
+
+            
+            decoration.innerHTML = '';
+
+            var h = Math.floor(height / 14);
+            var n = Math.floor(width / h);
+            var l = h + (width - n * h) / n;
+            for (var i = 1; i <= n; i++) {
+                decoration.innerHTML += "<div class='deco-block' style='width:"+l+"px; height:"+h+"px;'></div>";
+            }
+            
+        });
+</script>
 </html>
