@@ -12,6 +12,21 @@
 
 }
 
+@font-face {
+    font-family: "chubbo";
+    src: url("fonts/Chubbo-Variable.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "zodiak";
+    src: url("fonts/Zodiak-Bold.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 *, *::before, *::after {
     box-sizing: inherit;
     list-style: inherit;
@@ -23,6 +38,7 @@
     transition-property: all;
     font-family: serif;
 }
+
 a {
     color: var(--white);
 }

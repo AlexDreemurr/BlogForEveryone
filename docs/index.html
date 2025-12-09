@@ -4,6 +4,7 @@
         content="width=device-width, initial-scale=1"/>
 
         <link href="communal_style.css" type="text/css" rel="stylesheet"/>
+    
         
         <style>
             .nav-bar {   
@@ -39,27 +40,48 @@
                 font-size: 0.5rem;
             }
 
+            .title {
+                position: relative;
+                height: 20vh;
+            }
             .title-background {
                 display: flex;
-                height: 15vh;
+                height: 20vh;
             }
 
             .title-background > .left {
                 flex: 1;
                 background-color: var(--white);
             }
-            .title-background > .right {
+            .title-background > img.right {
                 flex: 3;
-                
+                width: 100%;
+                height: 100%;
                 object-fit: cover;
+                display: block;
 
             }
             .title > h1 {
-                position: relative;
-                top: -15vh;
+                position: absolute;
+                top: 2vh;
+                left: calc(25vw - 2.3em);
                 color: var(--red);
-            }
+                
+                font-size: 5em;
+                font-weight: 500;
+                font-family: "zodiak";
 
+
+            }
+            .decoration {
+                height: 10vh;
+                background-color: antiquewhite;
+                display: flex;
+            }
+            .deco-block {
+                flex: 1;
+                border: 1px black solid;
+            }
 
 
         </style>
@@ -81,6 +103,18 @@
                     <img class="right" src="img/title-background.jpg"/>
                 </div>
                 <h1>AlexDreemurr</h1>
+            </div>
+            <div class="decoration">
+                <div class="deco-block"></div>
+                <div class="deco-block"></div>
+                <div class="deco-block"></div>
+                <div class="deco-block"></div>
+                <div class="deco-block"></div>
+                <div class="deco-block"></div>
+                <div class="deco-block"></div>
+                <div class="deco-block"></div>
+                <div class="deco-block"></div>
+                <div class="deco-block"></div>
             </div>
         </main>
         <footer></footer>
