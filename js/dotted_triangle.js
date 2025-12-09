@@ -19,7 +19,7 @@ function dottedTriangle(
     grid.style.width = l + "px";
     grid.style.height = l + "px";
     grid.style.padding = pad + "px";
-
+    grid.style.paddingTop = pad * 0.5 + 'px';
     deco_block.appendChild(grid);
 
     const rows = 7;

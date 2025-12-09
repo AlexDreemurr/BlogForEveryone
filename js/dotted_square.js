@@ -14,6 +14,7 @@ function dottedSquare(deco_block, l, layer_color, dotRatio = 0.1, marginRatio = 
     // 可调的“边距”，保证点不被吞掉
     var padding = l * marginRatio;
     grid.style.padding = padding + "px";
+    grid.style.paddingTop = padding * 0.5 + 'px';
 
     // 容器尺寸
     grid.style.width = l + "px";
