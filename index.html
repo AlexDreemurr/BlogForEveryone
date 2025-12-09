@@ -41,11 +41,11 @@
 
             .title {
                 position: relative;
-                height: 15vh;
+                height: 20vh;
             }
             .title-background {
                 display: flex;
-                height: 15vh;
+                height: 20vh;
             }
 
             .title-background > .left {
@@ -62,7 +62,7 @@
             }
             .title > h1 {
                 position: absolute;
-                top: 2vh;
+                top: 3vh;
                 left: calc(25vw - 2.3em);
                 color: var(--red);
                 
@@ -77,7 +77,7 @@
             }
             @media (min-width: 900px) {
                 .title > h1 {
-                    font-size: 9vh;
+                    font-size: 11vh;
                 }
                 .title {
                     height: 20vh;
@@ -116,6 +116,7 @@
             </ul>
         </header>
         <main>
+            <div class="decoration"></div>
             <div class="title">
                 <div class="title-background">
                     <div class="left"></div>
@@ -124,6 +125,21 @@
                 <h1>Alex<span>Dreemurr</span></h1>
             </div>
 
+            <div class="decoration">
+
+            </div>
+            <div class="decoration">
+
+            </div>
+            <div class="decoration">
+
+            </div>
+            <div class="decoration">
+
+            </div>
+            <div class="decoration">
+
+            </div>
             <div class="decoration">
 
             </div>
@@ -154,29 +170,41 @@
         var width = window.innerWidth;
         var height = window.innerHeight;
         
-        var h = Math.floor(height / 14);
+        var h = Math.floor(height / 20);
         var n = Math.floor(width / h);
         var l = h + (width - n * h) / n;
-        decoration = document.getElementsByClassName("decoration")[0];
-        for (var i = 1; i <= n; i++) {
-            decoration.innerHTML +="<div class='deco-block' style='width:"+l+"px; height:"+h+"px; background-color: "+randChoice(color_list)+"'></div>";
-        }
-        var deco_blocks = decoration.querySelectorAll(".deco-block");
-        for (var i = 0; i < deco_blocks.length; i++) {
-            var deco_block = deco_blocks[i];
-            var color = randChoice(color_list, deco_block.style.backgroundColor);
-            var pattern = randChoice(pattern_list);
-            var direction;
-            if (pattern == 'dottedTriangle') {
-                direction = randChoice(direction_list);
-                dottedTriangle(deco_block, l, color, {corner:direction});
-            } else if (pattern == 'dottedSquare') {
-                dottedSquare(deco_block, l, color);
-            } else if (pattern == 'circle') {
-                circle(deco_block, l, color);
+        decorations = document.getElementsByClassName("decoration");
+
+        function drawEverything() {
+            for (var j = 0; j < decorations.length; j++) {
+                decoration = decorations[j];
+                var deco_blocks_color = [];
+            
+                for (var i = 1; i <= n; i++) {
+                    var color = randChoice(color_list);
+                    deco_blocks_color.push(color);
+                    decoration.innerHTML +="<div class='deco-block' style='width:"+l+"px; height:"+h+"px; background-color: "+color+"'></div>";
+                }
+
+                var deco_blocks = decoration.querySelectorAll(".deco-block");
+                for (var i = 0; i < deco_blocks.length; i++) {
+                    var deco_block = deco_blocks[i];
+                    var color = randChoice(color_list, deco_blocks_color[i]);
+                    var pattern = randChoice(pattern_list);
+                    var direction;
+                    if (pattern == 'dottedTriangle') {
+                        direction = randChoice(direction_list);
+                        dottedTriangle(deco_block, l, color, {corner:direction});
+                    } else if (pattern == 'dottedSquare') {
+                        dottedSquare(deco_block, l, color);
+                    } else if (pattern == 'circle') {
+                        circle(deco_block, l, color);
+                    }
+                }
             }
         }
-
+        drawEverything();
+        
         var first =  deco_blocks[0];
         circle(first, l, 'var(--red)');
 
@@ -186,27 +214,12 @@
             var height = document.documentElement.clientHeight;
             decoration.innerHTML = '';
 
-            var h = Math.floor(height / 14);
+            var h = Math.floor(height / 20);
             var n = Math.floor(width / h);
             var l = h + (width - n * h) / n;
-            for (var i = 1; i <= n; i++) {
-                decoration.innerHTML +="<div class='deco-block' style='width:"+l+"px; height:"+h+"px; background-color: "+randChoice(color_list)+"'></div>";
-            }
-            var deco_blocks = decoration.querySelectorAll(".deco-block");
-            for (var i = 0; i < deco_blocks.length; i++) {
-                var deco_block = deco_blocks[i];
-                var color = randChoice(color_list, deco_block.style.backgroundColor);
-                var pattern = randChoice(pattern_list);
-                var direction;
-                if (pattern == 'dottedTriangle') {
-                    direction = randChoice(direction_list);
-                    dottedTriangle(deco_block, l, color, {corner:direction});
-                } else if (pattern == 'dottedSquare') {
-                    dottedSquare(deco_block, l, color);
-                } else if (pattern == 'circle') {
-                    circle(deco_block, l, color);
-                }
-            }
+            decorations = document.getElementsByClassName("decoration");
+
+            drawEverything();
         });
     </script>
 </html>
