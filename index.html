@@ -169,8 +169,12 @@
         // 初始时根据页面尺寸生成deco-box
         var width = window.innerWidth;
         var height = window.innerHeight;
-        
-        var h = Math.floor(height / 20);
+        if (width >= 900) {
+            var h = Math.floor(height / 15);
+        } else {
+            var h = Math.floor(height / 20);
+        }
+
         var n = Math.floor(width / h);
         var l = h + (width - n * h) / n;
         decorations = document.getElementsByClassName("decoration");
@@ -213,8 +217,11 @@
             var width = document.documentElement.clientWidth;
             var height = document.documentElement.clientHeight;
             decoration.innerHTML = '';
-
-            var h = Math.floor(height / 20);
+            if (width >= 900) {
+                var h = Math.floor(height / 15);
+            } else {
+                var h = Math.floor(height / 20);
+            }
             var n = Math.floor(width / h);
             var l = h + (width - n * h) / n;
             decorations = document.getElementsByClassName("decoration");
