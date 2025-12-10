@@ -6,10 +6,20 @@
         <link href="communal_style.css" type="text/css" rel="stylesheet"/>
     
         <style>
+            .background {
+                position: fixed;
+                left: 0;
+                top: 0;
+                width: 100vw;
+                height: 100vh;
+                z-index: -1;
+                pointer-events: none;
+            }
+
             .nav-bar {   
                 display: flex;
                 background-color: var(--purple);
-                height: 10vh;
+                height: calc(var(--grid-h) * 2);
             }
 
             .nav-bar > a {
@@ -20,6 +30,8 @@
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
+                transition-property: all;
+                transition-duration: 0.5s;
             }
 
             .nav-bar > a:hover {
@@ -29,19 +41,20 @@
             }
 
             .nav-bar > a > svg {
-                height: 2.5rem;
-                width: 2.5rem;
+                height: var(--grid-h);
+                width: var(--grid-l);
                 display: block;
             }
             .nav-bar > a > p {
                 position: relative;
                 top: -0.1rem;
-                font-size: 0.5rem;
+                font-size: calc(var(--grid-h) / 5);
             }
 
             .title {
                 position: relative;
                 height: 20vh;
+                margin-top: var(--grid-h);
             }
             .title-background {
                 display: flex;
@@ -49,12 +62,12 @@
             }
 
             .title-background > .left {
-                width: 25vw;
+                width: calc(25vw);
                 background-color: var(--white);
             }
             .title-background > img.right {
+                width: calc(75vw);
                 
-                width: 75vw;
                 height: 100%;
                 object-fit: cover;
                 display: block;
@@ -66,7 +79,7 @@
                 left: calc(25vw - 2.3em);
                 color: var(--red);
                 
-                font-size: 2.3rem;
+                font-size: calc(var(--grid-h) * 0.75);
                 /*font-size: clamp(2rem, 5vh, 10rem);*/
                 font-weight: 500;
                 font-family: "zodiak";
@@ -79,7 +92,7 @@
             }
             @media (min-width: 900px) {
                 .title > h1 {
-                    font-size: 11vh;
+                    font-size: calc(var(--grid-h) * 1.2);
                 }
                 .title {
                     height: 20vh;
@@ -111,6 +124,7 @@
         <script src="js/quarter_circle.js"></script>
     </head>
     <body>
+        <div class="background"></div>
         <header>
             <ul class="nav-bar">
                 <a href="index.html"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path fill="currentColor" d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></svg><p>首页</p></a>
@@ -121,7 +135,6 @@
             </ul>
         </header>
         <main>
-            <div class="decoration"></div>
             <div class="title">
                 <div class="title-background">
                     <div class="left"></div>
@@ -130,27 +143,12 @@
                 <h1>Alex<span>Dreemurr</span></h1>
             </div>
 
-            <div class="decoration">
-
-            </div>
-            <div class="decoration">
-
-            </div>
-            <div class="decoration">
-
-            </div>
-            <div class="decoration">
-
-            </div>
-            <div class="decoration">
-
-            </div>
-
         </main>
         <footer></footer>
     </body>
 
     <script>
+        // 返回指定范围的随机整数
         function randInt(min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         }
@@ -160,6 +158,7 @@
         var direction_list = ['bottom-left', 'bottom-right', 'top-left', 'top-right'];
         var direction2_list = ['left', 'right', 'top', 'bottom'];
 
+        // 从列表中随机选择元素，already_item可指定不想重复的元素
         function randChoice(my_list, already_item = '') {
             var len = my_list.length;
             while (true) {
@@ -173,57 +172,89 @@
         // 初始时根据页面尺寸生成deco-box
         var width = window.innerWidth;
         var height = window.innerHeight;
-        var h = Math.floor(height / 15);
+        var lines = 15;
+        var h = Math.floor(height / lines) + (height - Math.floor(height / lines) * lines) / lines;
         var n = Math.floor(width / h);
         var l = h + (width - n * h) / n;
+
+        // 设置css全局变量：动态变化的 h 和 l
+        document.documentElement.style.setProperty('--grid-h', h + 'px');
+        document.documentElement.style.setProperty('--grid-l', l + 'px');
+
+
+        background = document.getElementsByClassName("background")[0];
+        for (var i = 1; i <= lines; i++) {
+            var decoration = document.createElement('div');
+            decoration.className = 'decoration';
+            background.appendChild(decoration);
+        }
+
         decorations = document.getElementsByClassName("decoration");
 
+        // 给定deco_block元素，随机绘制纹饰
+        function drawPattern(deco_block, l, h) {
+            /* deco_block: 父元素  l: 元素的宽(px)  h: 元素的高(px)*/
+
+            /* color: 纹饰的颜色  pattern: 纹饰的种类  direction: 纹饰的生成方向*/
+            var color = randChoice(color_list, deco_block.style.backgroundColor);
+            var pattern = randChoice(pattern_list);
+            var direction = randChoice(direction_list);
+            switch (pattern) {
+                case 'dottedTriangle':
+                    dottedTriangle(deco_block, l, h, color, {corner:direction}); 
+                    break;
+                case 'dottedSquare':
+                    dottedSquare(deco_block, l, h, color);
+                    break;
+                case 'triangle':
+                    triangle(deco_block, l, h, color, direction);
+                    break;
+                case 'circle':
+                    circle(deco_block, l, h, color);
+                    break;
+                case 'halfCircle':
+                    direction = randChoice(direction2_list);
+                    halfCircle(deco_block, l, h, color, direction);
+                    break;
+                case 'quarterCircle':
+                    quarterCircle(deco_block, l, h, color, direction);
+                    break;
+            }
+        }
+
+        // 对decorations里面
+        // 每一个decoration是一行
+        // 进行每一个小deco-box的纹样绘制
         function drawEverything(decorations, h, n, l) {
             for (var j = 0; j < decorations.length; j++) {
                 decoration = decorations[j];
-                var deco_blocks_color = [];
             
                 for (var i = 1; i <= n; i++) {
                     var color = randChoice(color_list);
-                    deco_blocks_color.push(color);
                     decoration.innerHTML +="<div class='deco-block' style='width:"+l+"px; height:"+h+"px; background-color: "+color+"'></div>";
                 }
 
                 var deco_blocks = decoration.querySelectorAll(".deco-block");
                 for (var i = 0; i < deco_blocks.length; i++) {
                     var deco_block = deco_blocks[i];
-                    var color = randChoice(color_list, deco_blocks_color[i]);
-                    var pattern = randChoice(pattern_list);
-                    var direction;
-                    if (pattern == 'dottedTriangle') {
-                        direction = randChoice(direction_list);
-                        dottedTriangle(deco_block, l, h, color, {corner:direction});
-                    } else if (pattern == 'dottedSquare') {
-                        dottedSquare(deco_block, l, h, color);
-                    } else if (pattern == 'circle') {
-                        circle(deco_block, l, h, color);
-                    } else if (pattern == 'triangle') {
-                        direction = randChoice(direction_list);
-                        triangle(deco_block, l, h, color, direction);
-                    } else if (pattern == 'halfCircle') {
-                        direction = randChoice(direction2_list);
-                        halfCircle(deco_block, l, h, color, direction);
-                    } else if (pattern == 'quarterCircle') {
-                        direction = randChoice(direction_list);
-                        quarterCircle(deco_block, l, h, color, direction);
-                    }
+                    drawPattern(deco_block, l, h);
                 }
             }
         }
+        
         drawEverything(decorations, h, n, l);
 
         // 监听窗口大小改变，自动调整deco-box的大小和数量
         window.addEventListener('resize', () => {
             var width = document.documentElement.clientWidth;
             var height = document.documentElement.clientHeight;
-            var h = Math.floor(height / 15);
+            var h = Math.floor(height / lines) + (height - Math.floor(height / lines) * lines) / lines;
             var n = Math.floor(width / h);
             var l = h + (width - n * h) / n;
+            // 设置css全局变量：动态变化的 h 和 l
+            document.documentElement.style.setProperty('--grid-h', h + 'px');
+            document.documentElement.style.setProperty('--grid-l', l + 'px');
+
             decorations = document.getElementsByClassName("decoration");
             for (var i =  0; i < decorations.length; i++) {
                 decorations[i].innerHTML = '';
