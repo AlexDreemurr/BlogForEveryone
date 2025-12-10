@@ -169,17 +169,12 @@
         // 初始时根据页面尺寸生成deco-box
         var width = window.innerWidth;
         var height = window.innerHeight;
-        if (width >= 900) {
-            var h = Math.floor(height / 15);
-        } else {
-            var h = Math.floor(height / 20);
-        }
-
+        var h = Math.floor(height / 15);
         var n = Math.floor(width / h);
         var l = h + (width - n * h) / n;
         decorations = document.getElementsByClassName("decoration");
 
-        function drawEverything() {
+        function drawEverything(decorations, h, n, l) {
             for (var j = 0; j < decorations.length; j++) {
                 decoration = decorations[j];
                 var deco_blocks_color = [];
@@ -207,26 +202,20 @@
                 }
             }
         }
-        drawEverything();
-        
-        var first =  deco_blocks[0];
-        circle(first, l, 'var(--red)');
+        drawEverything(decorations, h, n, l);
 
         // 监听窗口大小改变，自动调整deco-box的大小和数量
         window.addEventListener('resize', () => {
             var width = document.documentElement.clientWidth;
             var height = document.documentElement.clientHeight;
-            decoration.innerHTML = '';
-            if (width >= 900) {
-                var h = Math.floor(height / 15);
-            } else {
-                var h = Math.floor(height / 20);
-            }
+            var h = Math.floor(height / 15);
             var n = Math.floor(width / h);
             var l = h + (width - n * h) / n;
             decorations = document.getElementsByClassName("decoration");
-
-            drawEverything();
+            for (var i =  0; i < decorations.length; i++) {
+                decorations[i].innerHTML = '';
+            }
+            drawEverything(decorations, h, n, l);
         });
     </script>
 </html>
