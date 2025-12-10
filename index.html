@@ -22,6 +22,12 @@
                 height: calc(var(--grid-h) * 2);
             }
 
+            @media (min-width: 900px) {
+                .nav-bar {
+                    height: calc(var(--grid-h) * 1);
+                }
+            }
+
             .nav-bar > a {
                 flex: 1;
                 color: var(--whitegray);
@@ -53,12 +59,12 @@
 
             .title {
                 position: relative;
-                height: 20vh;
+                height: calc(var(--grid-h) * 3);
                 margin-top: var(--grid-h);
             }
             .title-background {
                 display: flex;
-                height: 20vh;
+                height: calc(var(--grid-h) * 3);
             }
 
             .title-background > .left {
@@ -93,12 +99,6 @@
             @media (min-width: 900px) {
                 .title > h1 {
                     font-size: calc(var(--grid-h) * 1.2);
-                }
-                .title {
-                    height: 20vh;
-                }
-                .title-background {
-                    height: 20vh;
                 }
             }
             .decoration {
@@ -153,6 +153,14 @@
             return Math.floor(Math.random() * (max - min + 1)) + min;
         }
 
+        // 根据屏幕大小返回纹样行数
+        function chooseLine(width) {
+            if (width > 900) {
+                return 12;
+            } else {
+                return 15;
+            }
+        }
         var color_list = ['var(--red)', 'var(--red)', 'var(--purple)', 'var(--purple)', 'var(--brown)', 'var(--white)', 'var(--gray)', 'var(--yellow)'];
         var pattern_list = ['dottedSquare','dottedSquare',  'dottedTriangle','dottedTriangle', 'circle', 'triangle', 'triangle', 'triangle', 'halfCircle', 'quarterCircle'];
         var direction_list = ['bottom-left', 'bottom-right', 'top-left', 'top-right'];
@@ -172,7 +180,7 @@
         // 初始时根据页面尺寸生成deco-box
         var width = window.innerWidth;
         var height = window.innerHeight;
-        var lines = 15;
+        var lines = chooseLine(width);
         var h = Math.floor(height / lines) + (height - Math.floor(height / lines) * lines) / lines;
         var n = Math.floor(width / h);
         var l = h + (width - n * h) / n;
@@ -248,6 +256,7 @@
         window.addEventListener('resize', () => {
             var width = document.documentElement.clientWidth;
             var height = document.documentElement.clientHeight;
+            lines = chooseLine(width);
             var h = Math.floor(height / lines) + (height - Math.floor(height / lines) * lines) / lines;
             var n = Math.floor(width / h);
             var l = h + (width - n * h) / n;
