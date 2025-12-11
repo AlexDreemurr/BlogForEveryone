@@ -1,7 +1,7 @@
 <html>
     <head>
         <meta name="viewport"
-        content="width=device-width, initial-scale=1, user-scalable=no"/>
+        content="width=device-width, initial-scale=1"/>
 
         <link href="communal_style.css" type="text/css" rel="stylesheet"/>
     
@@ -101,6 +101,86 @@
                     font-size: calc(var(--grid-h) * 1.2);
                 }
             }
+
+            .content {
+                margin-top: var(--grid-h);
+                width: calc(100vw);
+                font-size: calc(0.3 * var(--grid-h));
+                display: flex;
+            }
+            .content .left {
+                flex: 1;
+            }
+            .img-box {
+                background-color: rgba(0, 0, 0, 50%);
+                padding: calc(0.5 * var(--grid-h)) calc(0.5 * var(--grid-l));
+                width: calc(3 * var(--grid-l));
+                height: calc(3 * var(--grid-h));
+            }
+            .content .left img {
+                width: 100%;
+                object-fit: cover;
+            }
+            .content .right {
+                flex: 3;
+                display: flex;
+                background-color: rgba(0, 0, 0, 50%);
+                padding: calc(0.2 * var(--grid-h)) calc(0.2 * var(--grid-l));
+            }
+            @media (min-width: 900px) {
+                .content .left {
+                    display: flex;
+                }
+            }
+            @media (max-width: 650px) {
+                .content .right {
+                    display: grid;
+                    grid-template-columns: 1fr 2fr;
+                    gap: calc(0.2 * var(--grid-h)) calc(0.2 * var(--grid-l));
+                }
+
+                .content .right .pair {
+                    display: contents;  /* 让 pair 不占位置，把里面两个元素放进 grid */
+                }
+
+                .content .right .attr {
+                    grid-column: 1;     /* 全部 attr 放在左列 */
+                    background-color: var(--purple);
+                    color: white;
+                }
+
+                .content .right .info {
+                    grid-column: 2;     /* 全部 info 放在右列 */
+                    background-color: var(--white);
+                    color: var(--purple);
+                }
+            }
+            @media (min-width: 650px) {
+                .content .right .pair {
+                    flex: 1;
+                }
+                .content .right > .pair + .pair {
+                    margin-left: calc(0.5 * var(--grid-l));
+                }
+            }
+            .attr, .info {
+                display: flex;
+                align-items: center;   /* 垂直居中 */
+                justify-content: center; /* 水平居中 */
+                height: var(--grid-h);
+            }
+            .pair:nth-child(2n-1) .attr {
+                background-color: var(--red);
+            }
+            .pair:nth-child(2n) .attr {
+                background-color: var(--purple);
+            }
+            .info {
+                background-color: var(--white);
+                color: var(--purple);
+            }
+
+
             .decoration {
                 height: fit-content;
                 display: flex;
@@ -114,6 +194,7 @@
             .dot {
                 
             }
+
 
         </style>
         <script src="js/dotted_square.js"></script>
@@ -143,6 +224,37 @@
                 <h1>Alex<span>Dreemurr</span></h1>
             </div>
 
+            <div class="content">
+                <div class="left">
+                    <div class="img-box">
+                        <img src="img/headpic.jpg"/>
+                    </div>
+                    <div class="img-box">
+                        <img src="img/headpic.jpg"/>
+                    </div>
+                    
+                </div>
+
+                <div class="right">
+                    <div class="pair">
+                        <div class="attr">姓名</div>
+                        <div class="info">尹智忆</div>
+                    </div>
+                    <div class="pair">
+                        <div class="attr">出生日期</div>
+                        <div class="info">2007年4月17日</div>
+                    </div>
+                    <div class="pair">
+                        <div class="attr">就读大学</div>
+                        <div class="info">杭州电子科技大学</div>
+                    </div>
+                    <div class="pair">
+                        <div class="attr">专业</div>
+                        <div class="info">工业工程</div>
+                    </div>
+                </div>
+
+            </div>
         </main>
         <footer></footer>
     </body>
