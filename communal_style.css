@@ -46,6 +46,61 @@ a {
 body {
     background-color: var(--red);
     color: white;
-    overflow: hidden;
 }
 
+.background {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.nav-bar {   
+    display: flex;
+    background-color: var(--purple);
+    height: calc(var(--grid-h) * 2);
+}
+
+@media (min-width: 900px) {
+    .nav-bar {
+        height: calc(var(--grid-h) * 1);
+    }
+}
+
+.nav-bar > a {
+    flex: 1;
+    color: var(--whitegray);
+    padding: 0.3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition-property: all;
+    transition-duration: 0.5s;
+}
+
+.nav-bar > a:hover {
+    background-color: var(--white);
+    color: var(--purple);
+    cursor: pointer;
+}
+
+.nav-bar > a > svg {
+    height: var(--grid-h);
+    width: var(--grid-l);
+    display: block;
+}
+.nav-bar > a > p {
+    position: relative;
+    top: -0.1rem;
+    font-size: calc(var(--grid-h) / 5);
+}
+
+
+.decoration {
+    height: fit-content;
+    display: flex;
+}
