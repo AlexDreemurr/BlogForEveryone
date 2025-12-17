@@ -9,9 +9,9 @@ function randInt(min, max) {
 // 根据屏幕大小返回纹样行数
 function chooseLine(width) {
     if (width > 900) {
-        return Math.round(12 * (document.body.scrollHeight / window.innerHeight));
+        return 12;
     } else {
-        return Math.round(15 * (document.body.scrollHeight / window.innerHeight));
+        return 15;
     }
 }
 var color_list = ['var(--red)', 'var(--red)', 'var(--purple)', 'var(--purple)', 'var(--brown)', 'var(--white)', 'var(--gray)', 'var(--yellow)'];
@@ -34,7 +34,7 @@ function randChoice(my_list, already_item = '') {
 
 // 初始时根据页面尺寸生成deco-box
 var width = window.innerWidth;
-var height = document.body.scrollHeight;
+var height = window.innerHeight;
 var lines = chooseLine(width);
 var h = Math.floor(height / lines) + (height - Math.floor(height / lines) * lines) / lines;
 var n = Math.floor(width / h);
@@ -109,8 +109,8 @@ drawEverything(decorations, h, n, l);
 
 // 监听窗口大小改变，自动调整deco-box的大小和数量
 window.addEventListener('resize', () => {
-    var width = document.documentElement.clientWidth;
-    var height = document.body.scrollHeight;
+    var width = window.innerWidth;
+    var height = window.innerHeight;
     lines = chooseLine(width);
     var h = Math.floor(height / lines) + (height - Math.floor(height / lines) * lines) / lines;
     var n = Math.floor(width / h);

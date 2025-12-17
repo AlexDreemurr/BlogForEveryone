@@ -4,27 +4,26 @@
         content="width=device-width, initial-scale=1"/>
 
         <link href="communal_style.css" type="text/css" rel="stylesheet"/>
-    
+        
         <style>
             .diary-box {
                 width: 80vw;
+                height: calc(100vh - 2 * var(--grid-h));
                 margin: 1em auto 0 auto;
-            }
-            @media (min-width: 600px) {
-                .diary-box {
-                    width: 60vw;
-                }
-            }
-            @media (min-width: 1200px) {
-                .diary-box {
-                    width: 40vw;
-                }
+                overflow-y: scroll;
+                
             }
             .diary {
-                height: 20vh;
+                height: calc(2 * var(--grid-h));
                 border: 2px black solid;
                 border-radius: 0.5em;
                 box-shadow: 0.5em 0.5em black;
+                transition-duration: 0.5s;
+                transition-property: background-color, color;
+                position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
             .diary + .diary {
                 margin-top: 1em;
@@ -35,6 +34,50 @@
             .diary:nth-child(2n) {
                 background-color: var(--purple);
             }
+            .diary:last-child {
+                margin-bottom: var(--grid-h);
+            }
+            .diary:hover {
+                background-color: var(--white);
+                color: black;
+                cursor: pointer;
+            }
+            .diary .title {
+                font-size: calc(0.4 * var(--grid-h));
+            }
+            .diary .date {
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                display: flex;
+                padding: 0.5em;
+                gap: 0.5em;
+                font-size: 0.9em;
+            }
+            .diary svg {
+                fill: currentColor;
+            }
+            @media (min-width: 600px) {
+                .diary-box {
+                    width: 60vw;
+                }
+                .diary .title {
+                    font-size: calc(0.5 * var(--grid-h));
+                }
+                .diary {
+                    height: 20vh;
+                }
+            }
+            @media (min-width: 900px) {
+                .diary-box {
+                    height: calc(100vh - 1 * var(--grid-h));
+                }
+            }
+            @media (min-width: 1200px) {
+                .diary-box {
+                    width: 40vw;
+                }
+            }
         </style>
         <script src="js/dotted_square.js"></script>
         <script src="js/dotted_triangle.js"></script>
@@ -42,6 +85,7 @@
         <script src="js/triangle.js"></script>
         <script src="js/half-circle.js"></script>
         <script src="js/quarter_circle.js"></script>
+        <script src="js/clickDiary.js"></script>
     </head>
     <body>
         <div class="background"></div>
@@ -56,23 +100,47 @@
         </header>
         <main>
             <div class="diary-box">
-                <div class="diary" id="diary-1">
-                    1
+                <div class="diary" id="diary-1" onclick="clickDiary(this)">
+                    <p class="title">网站初始公告</p>
+                    <div class="date">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M200-640h560v-80H200v80Zm0 0v-80 80Zm0 560q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v227q-19-9-39-15t-41-9v-43H200v400h252q7 22 16.5 42T491-80H200Zm520 40q-83 0-141.5-58.5T520-240q0-83 58.5-141.5T720-440q83 0 141.5 58.5T920-240q0 83-58.5 141.5T720-40Zm67-105 28-28-75-75v-112h-40v128l87 87Z"/></svg>
+                        <p>2025年12月17日</p>
+                    </div>
                 </div>
                 <div class="diary" id="diary-2">
-                    2
+                    <p class="title">网站初始公网站初始公告网站初始公告告</p>
+                    <div class="date">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M200-640h560v-80H200v80Zm0 0v-80 80Zm0 560q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v227q-19-9-39-15t-41-9v-43H200v400h252q7 22 16.5 42T491-80H200Zm520 40q-83 0-141.5-58.5T520-240q0-83 58.5-141.5T720-440q83 0 141.5 58.5T920-240q0 83-58.5 141.5T720-40Zm67-105 28-28-75-75v-112h-40v128l87 87Z"/></svg>
+                        <p>2025年12月17日</p>
+                    </div>
                 </div>
                 <div class="diary" id="diary-3">
-                    3
+                    <p class="title">网站初始公网站初始公告网站初始公告告</p>
+                    <div class="date">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M200-640h560v-80H200v80Zm0 0v-80 80Zm0 560q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v227q-19-9-39-15t-41-9v-43H200v400h252q7 22 16.5 42T491-80H200Zm520 40q-83 0-141.5-58.5T520-240q0-83 58.5-141.5T720-440q83 0 141.5 58.5T920-240q0 83-58.5 141.5T720-40Zm67-105 28-28-75-75v-112h-40v128l87 87Z"/></svg>
+                        <p>2025年12月17日</p>
+                    </div>
                 </div>
                 <div class="diary" id="diary-4">
-                    4
+                    <p class="title">网站初始公网站初始公告网站初始公告告</p>
+                    <div class="date">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M200-640h560v-80H200v80Zm0 0v-80 80Zm0 560q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v227q-19-9-39-15t-41-9v-43H200v400h252q7 22 16.5 42T491-80H200Zm520 40q-83 0-141.5-58.5T520-240q0-83 58.5-141.5T720-440q83 0 141.5 58.5T920-240q0 83-58.5 141.5T720-40Zm67-105 28-28-75-75v-112h-40v128l87 87Z"/></svg>
+                        <p>2025年12月17日</p>
+                    </div>
                 </div>
                 <div class="diary" id="diary-5">
-                    5
+                    <p class="title">网站初始公网站初始公告网站初始公告告</p>
+                    <div class="date">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M200-640h560v-80H200v80Zm0 0v-80 80Zm0 560q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v227q-19-9-39-15t-41-9v-43H200v400h252q7 22 16.5 42T491-80H200Zm520 40q-83 0-141.5-58.5T520-240q0-83 58.5-141.5T720-440q83 0 141.5 58.5T920-240q0 83-58.5 141.5T720-40Zm67-105 28-28-75-75v-112h-40v128l87 87Z"/></svg>
+                        <p>2025年12月17日</p>
+                    </div>
                 </div>
                 <div class="diary" id="diary-6">
-                    6
+                    <p class="title">网站初始公网站初始公告网站初始公告告</p>
+                    <div class="date">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M200-640h560v-80H200v80Zm0 0v-80 80Zm0 560q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v227q-19-9-39-15t-41-9v-43H200v400h252q7 22 16.5 42T491-80H200Zm520 40q-83 0-141.5-58.5T520-240q0-83 58.5-141.5T720-440q83 0 141.5 58.5T920-240q0 83-58.5 141.5T720-40Zm67-105 28-28-75-75v-112h-40v128l87 87Z"/></svg>
+                        <p>2025年12月17日</p>
+                    </div>
                 </div>
             </div>
 

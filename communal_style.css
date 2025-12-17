@@ -7,6 +7,7 @@
     --purple: #334063;
     --brown: #9b7131;
     --yellow: hsl(36, 37%, 65%);
+    --paper-yellow: hsl(36, 27%, 77%);
     --white: #ffffff;
     --whitegray: hsl(223.75, 32%, 90%);
     --whitegrayer: hsl(223.75, 32%, 85%);
@@ -46,6 +47,7 @@ a {
 body {
     background-color: var(--red);
     color: white;
+    overflow: hidden;
 }
 
 .background {
