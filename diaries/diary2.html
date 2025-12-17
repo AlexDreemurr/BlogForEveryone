@@ -12,19 +12,18 @@
             }
             body {
                 overflow-y: scroll;
+                background-color: black;
             }
             main {
                 width: 100%;
-                height: calc(100vh - 2 * var(--grid-h));
             }
 
             .paper-content {
-                background-image: url(../img/diary-background/old-fashioned/diary-background8.jpg);
+                background-image: url(../img/diary-background/black-style/diary-background3.jpg);
                 background-size: 100% auto;
-                max-width: 600px;
-                height: 900px;
+                max-width: 400px;
                 margin: 0 auto;
-                color: black;
+                color: var(--whitegray);
                 position: relative;
                 font-size: 2.45vh;
                 line-height: 155%;
@@ -35,7 +34,7 @@
             .inner-box {
                 max-width: 450px;
                 height: fit-content;
-                margin-top: 5em;
+                margin-top: 2em;
             }
             .description {
                 margin-bottom: 2em;
@@ -52,14 +51,14 @@
             }
             @media (max-width: 600px) {
                 .inner-box {
-                    margin-top: 3em;
+                    margin-top: 1.5em;
                 }
                 .paper-content {
-                    font-size: 2.5vh;
+                    font-size: 2.3vh;
                     line-height: 145%;
                 }
                 .description {
-                    margin-bottom: 1em;
+                    margin-bottom: 1.5em;
                 }
                 .content {
                     max-width: 300px;
