@@ -38,10 +38,12 @@
             }
             .description {
                 margin-bottom: 2em;
+                font-family: 'noto-serif';
             }
             .content {
                 text-indent: 2em;
                 max-width: 450px;
+                font-family: 'noto-serif', serif;
             }
             
             @media (min-width: 900px) {
@@ -107,7 +109,7 @@
             paperContent = document.getElementsByClassName('paper-content')[0];
             setInterval(() => {
                 paperContent.style.height = 1.5 * paperContent.clientWidth + 'px';
-            }, 10); 
+            }); 
         </script>
     </body>
 
