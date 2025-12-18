@@ -45,7 +45,31 @@
                 text-align: center;
                 color: black;
             }
-            
+            .gallery-item {
+                position: relative;
+                overflow: hidden;
+            }
+
+            .gallery-item::after {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background: rgba(0, 0, 0, 0.4);
+                opacity: 0;
+                transition: opacity 0.3s;
+            }
+            .gallery-item:hover {
+                cursor: pointer;
+            }
+            .gallery-item:hover::after {
+                opacity: 1;
+            }
+
+            @media (min-width: 900px) {
+                .gallery-box {
+                    height: calc(100vh - 3 * var(--grid-h));
+                }
+            }
             @media (max-width: 700px) {
                 .gallery-box {
                     width: 80vw;
@@ -113,46 +137,46 @@
                 <h1>Alex's Gallery</h1>
                 <h2>11个相册</h2>
                 <div class="inner-box">
-                    <div class="gallery-item">
+                    <a class="gallery-item" href="gallery-inner1.html">
+                        <img src="img/headpic.jpg"/>
+                        <p class="gallery-name">日本旅游</p>
+                    </a>
+                    <a class="gallery-item" href="gallery-inner1.html">
                         <img src="img/headpic.jpg"/>
                         <p class="gallery-name">相册1</p>
-                    </div>
-                    <div class="gallery-item">
+                    </a>
+                    <a class="gallery-item" href="gallery-inner1.html">
                         <img src="img/headpic.jpg"/>
                         <p class="gallery-name">相册1</p>
-                    </div>
-                    <div class="gallery-item">
+                    </a>
+                    <a class="gallery-item" href="gallery-inner1.html">
                         <img src="img/headpic.jpg"/>
                         <p class="gallery-name">相册1</p>
-                    </div>
-                    <div class="gallery-item">
+                    </a>
+                    <a class="gallery-item" href="gallery-inner1.html">
                         <img src="img/headpic.jpg"/>
                         <p class="gallery-name">相册1</p>
-                    </div>
-                    <div class="gallery-item">
+                    </a>
+                    <a class="gallery-item" href="gallery-inner1.html">
                         <img src="img/headpic.jpg"/>
                         <p class="gallery-name">相册1</p>
-                    </div>
-                    <div class="gallery-item">
+                    </a>
+                    <a class="gallery-item" href="gallery-inner1.html">
                         <img src="img/headpic.jpg"/>
                         <p class="gallery-name">相册1</p>
-                    </div>
-                    <div class="gallery-item">
+                    </a>
+                    <a class="gallery-item" href="gallery-inner1.html">
                         <img src="img/headpic.jpg"/>
                         <p class="gallery-name">相册1</p>
-                    </div>
-                    <div class="gallery-item">
+                    </a>
+                    <a class="gallery-item" href="gallery-inner1.html">
                         <img src="img/headpic.jpg"/>
                         <p class="gallery-name">相册1</p>
-                    </div>
-                    <div class="gallery-item">
+                    </a>
+                    <a class="gallery-item" href="gallery-inner1.html">
                         <img src="img/headpic.jpg"/>
                         <p class="gallery-name">相册1</p>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="img/headpic.jpg"/>
-                        <p class="gallery-name">相册1</p>
-                    </div>
+                    </a>
                 </div>
                 
                 
