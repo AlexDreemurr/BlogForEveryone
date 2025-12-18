@@ -11,6 +11,7 @@
     --white: #ffffff;
     --whitegray: hsl(223.75, 32%, 90%);
     --whitegrayer: hsl(223.75, 32%, 85%);
+    --gallery-paper: hsl(190, 10%, 82%);
 
 }
 
@@ -117,4 +118,33 @@ body {
 .decoration {
     height: fit-content;
     display: flex;
+}
+
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #555 transparent;
+}
+
+/* Chromium / Edge / Safari */
+*::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #555;
+    border-radius: 6px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background-color: #444;
+}
+
+*::-webkit-scrollbar-thumb:active {
+    background-color: #333;
 }
