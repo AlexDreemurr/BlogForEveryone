@@ -125,31 +125,7 @@
                     <h1>日本旅游</h1>
                     <button>切换浏览模式</button>
                     <div class="gallery-box">
-                        <img src="gallery/gallery1/2025-08-05 163821.jpg"/>
-                        <img src="gallery/gallery1/2025-08-05 163821.jpg"/>
-                        <img src="gallery/gallery1/2025-08-05 163821.jpg"/>
-                        <img src="gallery/gallery1/2025-08-05 163821.jpg"/>
-                        <img src="gallery/gallery1/2025-08-05 163821.jpg"/>
-                        <img src="gallery/gallery1/2025-08-05 163821.jpg"/>
-                        <img src="gallery/gallery1/2025-08-05 163821.jpg"/>
-                        <img src="gallery/gallery1/2025-08-05 163821.jpg"/>
-                        <img src="gallery/gallery1/2025-08-05 163821.jpg"/>
-                        <img src="gallery/gallery1/2025-08-05 163821.jpg"/>
-                        <img src="gallery/gallery1/2025-08-05 163821.jpg"/>
-                        <img src="gallery/gallery1/2025-08-05 163821.jpg"/>
-                        <img src="gallery/gallery1/2025-08-05 163821.jpg"/>
-                        <img src="gallery/gallery1/2025-08-05 163821.jpg"/>
-                        <img src="gallery/gallery1/2025-08-05 163821.jpg"/>
-                        <img src="gallery/gallery1/2025-08-05 163821.jpg"/>
-                        <img src="gallery/gallery1/2025-08-05 163821.jpg"/>
-                        <img src="gallery/gallery1/2025-08-05 163821.jpg"/>
-                        <img src="gallery/gallery1/2025-08-05 163821.jpg"/>
-                        <img src="gallery/gallery1/2025-08-05 163821.jpg"/>
-                        <img src="gallery/gallery1/2025-08-05 163821.jpg"/>
-                        <img src="gallery/gallery1/2025-08-05 163821.jpg"/>
-                        <img src="gallery/gallery1/2025-08-05 163821.jpg"/>
-                        <img src="gallery/gallery1/2025-08-05 163821.jpg"/>
-                        <img src="gallery/gallery1/2025-08-05 163821.jpg"/>
+                        
                     </div>
                     <div class="introduction">
                         <h2>介绍</h2>
@@ -161,6 +137,32 @@
         </main>
         <footer></footer>
         <script src="js/draw_background.js"></script>
+        <script>
+            const params = new URLSearchParams(location.search);
+            const galleryId = params.get('id');
+
+            fetch('gallery/gallery.json')
+                .then(res => res.json())
+                .then(galleries => {
+                    const gallery = galleries.find(g => g.id == galleryId);
+                    
+                    // 设置标题
+                    document.querySelector('.container-box h1').textContent = gallery.title;
+
+                    return fetch(`gallery/${gallery.folder}/images.json`)
+                        .then(res => res.json())
+                        .then(images => ({gallery, images}));
+                })
+                .then(({gallery, images}) => {
+                    const container = document.getElementsByClassName('gallery-box')[0];
+                    images.forEach(filename => {
+                        const img = document.createElement('img');
+                        img.src = `gallery/${gallery.folder}/${filename}`;
+                        img.alt = gallery.title;
+                        container.appendChild(img);
+                    });
+                })
+        </script>
     </body>
 
 </html>

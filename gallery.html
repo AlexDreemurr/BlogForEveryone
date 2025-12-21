@@ -41,7 +41,7 @@
                 height: 85%;
                 object-fit: cover;
             }
-            .gallery-item > .gallery-name {
+            .gallery-item > p {
                 text-align: center;
                 color: black;
             }
@@ -106,7 +106,7 @@
                     height: 85%;
                     object-fit: cover;
                 }
-                .gallery-item > .gallery-name {
+                .gallery-item > p {
                     text-align: center;
                     color: black;
                 }
@@ -137,46 +137,7 @@
                 <h1>Alex's Gallery</h1>
                 <h2>11个相册</h2>
                 <div class="inner-box">
-                    <a class="gallery-item" href="gallery-inner1.html">
-                        <img src="img/headpic.jpg"/>
-                        <p class="gallery-name">日本旅游</p>
-                    </a>
-                    <a class="gallery-item" href="gallery-inner1.html">
-                        <img src="img/headpic.jpg"/>
-                        <p class="gallery-name">相册1</p>
-                    </a>
-                    <a class="gallery-item" href="gallery-inner1.html">
-                        <img src="img/headpic.jpg"/>
-                        <p class="gallery-name">相册1</p>
-                    </a>
-                    <a class="gallery-item" href="gallery-inner1.html">
-                        <img src="img/headpic.jpg"/>
-                        <p class="gallery-name">相册1</p>
-                    </a>
-                    <a class="gallery-item" href="gallery-inner1.html">
-                        <img src="img/headpic.jpg"/>
-                        <p class="gallery-name">相册1</p>
-                    </a>
-                    <a class="gallery-item" href="gallery-inner1.html">
-                        <img src="img/headpic.jpg"/>
-                        <p class="gallery-name">相册1</p>
-                    </a>
-                    <a class="gallery-item" href="gallery-inner1.html">
-                        <img src="img/headpic.jpg"/>
-                        <p class="gallery-name">相册1</p>
-                    </a>
-                    <a class="gallery-item" href="gallery-inner1.html">
-                        <img src="img/headpic.jpg"/>
-                        <p class="gallery-name">相册1</p>
-                    </a>
-                    <a class="gallery-item" href="gallery-inner1.html">
-                        <img src="img/headpic.jpg"/>
-                        <p class="gallery-name">相册1</p>
-                    </a>
-                    <a class="gallery-item" href="gallery-inner1.html">
-                        <img src="img/headpic.jpg"/>
-                        <p class="gallery-name">相册1</p>
-                    </a>
+                    
                 </div>
                 
                 
@@ -184,6 +145,40 @@
         </main>
         <footer></footer>
         <script src="js/draw_background.js"></script>
+        <script>
+            fetch('gallery/gallery.json')
+                .then(res => res.json())
+                .then(galleries => {
+                    const container = document.getElementsByClassName('inner-box')[0];
+                    
+                    galleries.forEach(gallery => {
+                        // 1. 外层div
+                        const item = document.createElement('div');
+                        item.className = 'gallery-item';
+                        item.id = `gallery-${gallery.id}`;
+
+                        // 2. 封面图片
+                        const img = document.createElement('img');
+                        img.src = `gallery/${gallery.folder}/${gallery.cover}`;
+                        img.alt = gallery.title;
+
+                        // 3. 标题
+                        const title = document.createElement('p');
+                        title.textContent = gallery.title;
+
+                        // 4. 点击跳转
+                        item.addEventListener('click', () => {
+                            location.href = `gallery-inner.html?id=${gallery.id}`;
+                        });
+
+                        // 5. 组装
+                        item.appendChild(img);
+                        item.appendChild(title);
+                        container.appendChild(item);
+                    });
+                });
+
+        </script>
     </body>
 
 </html>

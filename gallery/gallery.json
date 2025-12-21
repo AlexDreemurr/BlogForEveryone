@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "folder": "gallery1",
+    "title": "日本旅游",
+    "cover": "cover.jpg"
+  },
+  {
+    "id": 2,
+    "folder": "gallery2",
+    "title": "2024南京",
+    "cover": "cover.jpg"
+  }
+]
