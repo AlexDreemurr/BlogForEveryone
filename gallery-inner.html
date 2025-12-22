@@ -6,6 +6,15 @@
         <link href="communal_style.css" type="text/css" rel="stylesheet"/>
         
         <style>
+            html, body {
+                height: 100%;
+                margin: 0;
+            }
+
+            main {
+                height: calc(100dvh - var(--grid-h)); /* header 高度 */
+                overflow: hidden;
+            }
             button {
                 background-color: rgba(255, 255, 255, 0.95);
                 color: black;
@@ -135,12 +144,12 @@
                 .container-box {
                     background-color: rgba(0, 0, 0, 0.7);
                     width: 100%;
-                    height: calc(100vh - 2 * var(--grid-h));
+                    height: 100%;
+                    min-height: 0;
                     margin: 0 auto;
-                    padding: 1em;
                     display: grid;
                     grid-template-columns: 5fr 1fr;
-                    grid-template-rows: 1fr 2fr 10fr;
+                    grid-template-rows: auto auto 1fr;
                     gap: 0;
                 }
                 .container-box > h1 {
@@ -164,7 +173,10 @@
                 }
                 .gallery-box {
                     padding: 0.5em;
+                    min-height: 0;
+                    overflow-y: auto;
                     gap: 0.5em;
+                    margin-bottom: 3em;
                 }
                 .gallery-box > img {
                     width: 100px;
