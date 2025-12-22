@@ -32,8 +32,12 @@ folders.forEach((dir, index) => {
     // images为相册文件夹下所有图片的列表
     const images = files.filter(filename => {
         const ext = path.extname(filename).toLowerCase();
-        return IMAGE_EXTENSIONS.includes(ext) && filename !== 'cover.jpg';
-    });
+        return IMAGE_EXTENSIONS.includes(ext);
+    }).sort((a, b) =>
+        // 用数字顺寻sort
+        a.localeCompare(b, 'en', { numeric: true })
+    );
+
     // 接下来要创建的images.json的路径
     const imagesJsonPath = path.join(folderPath, 'images.json');
     // 写入images.json
