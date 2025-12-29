@@ -135,7 +135,7 @@
             
             <div class="gallery-box">
                 <h1>Alex's Gallery</h1>
-                <h2>11个相册</h2>
+                <h2 id="gallery-info">11个相册</h2>
                 <div class="inner-box">
                     
                 </div>
@@ -150,7 +150,8 @@
                 .then(res => res.json())
                 .then(galleries => {
                     const container = document.getElementsByClassName('inner-box')[0];
-                    
+                    const gallery_info = document.getElementById('gallery-info');
+                    gallery_info.innerHTML = galleries.length + '个相册';
                     galleries.forEach(gallery => {
                         // 1. 外层div
                         const item = document.createElement('div');

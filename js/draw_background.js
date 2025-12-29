@@ -30,8 +30,6 @@ function randChoice(my_list, already_item = '') {
     }
 }
 
-
-
 // 初始时根据页面尺寸生成deco-box
 var width = window.innerWidth;
 var height = window.innerHeight;
@@ -125,3 +123,6 @@ window.addEventListener('resize', () => {
     }
     drawEverything(decorations, h, n, l);
 });
+
+//DOMContentLoaded
+//fullscreenchange
